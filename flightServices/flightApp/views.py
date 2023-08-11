@@ -12,13 +12,15 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def find_flights(request):
+    print("hii")
     flights=Flight.objects.filter(departureCity=request.data['departureCity'],arrivalCity=request.data['arrivalCity'],dateOfDeparture=request.data['dateOfDeparture'])
     serialized_data=FlightSerializer(flights,many=True)
     return Response(serialized_data.data)
 
 @api_view(['POST'])
 def save_reservation(request):
-    flight=Flight.objects.get(flightNumber=request.data['flightNumber'])
+    print(request.data)
+    flight=Flight.objects.get(pk=request.data['flightId'])
 
     passenger=Passenger()
     passenger.firstName=request.data['firstName']
@@ -40,7 +42,7 @@ def save_reservation(request):
 class FlightViewSet(viewsets.ModelViewSet):
     queryset=Flight.objects.all()
     serializer_class=FlightSerializer
-    permission_classes=[IsAuthenticated]
+    #permission_classes=[IsAuthenticated]
 
 
 class PassengerViewSet(viewsets.ModelViewSet):

@@ -15,7 +15,7 @@ def createAuthToken(sender,instance,created,**kwargs):
 
 
 class Flight(models.Model):
-    flightNumber=models.CharField(max_length=10)
+    flightId=models.CharField(max_length=10)
     operatingAirlines=models.CharField(max_length=10)
     departureCity=models.CharField(max_length=10)
     arrivalCity=models.CharField(max_length=10)
